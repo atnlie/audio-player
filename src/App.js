@@ -11,9 +11,11 @@ import {
   StatusBar,
   useColorScheme,
 } from 'react-native';
+import {Provider} from 'react-redux';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {AudioPlayer} from './Containers/AudioPlayer/AudioPlayer';
+import {Store} from './Store/Store';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,10 +25,12 @@ const App: () => Node = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AudioPlayer />
-    </SafeAreaView>
+    <Provider store={Store}>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <AudioPlayer />
+      </SafeAreaView>
+    </Provider>
   );
 };
 
