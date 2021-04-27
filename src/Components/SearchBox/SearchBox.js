@@ -13,7 +13,7 @@ const SearchBox = () => {
     console.log('Search for : ', searchValue);
     if (searchValue.length > 3) {
       console.log('Fetch Data with : ', searchValue);
-      dispatch(getAudioList('love'));
+      dispatch(getAudioList(searchValue));
     }
   }, [searchValue]);
 
