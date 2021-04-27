@@ -8,24 +8,25 @@ import playButton from '../../Assets/wav.jpg';
 import * as ActionTypes from '../../Reducers/AudioReducer/AudioActionTypes';
 
 const Item = ({item, onPress, backgroundColor, textColor}) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <View syles={{flex: 2, flexDirection: 'row'}}>
-      <View style={{flex: 1}}>
+  <TouchableOpacity
+    onPress={onPress}
+    style={[styles.item, backgroundColor]}
+    key={`itemBtn-${item?.trackId}`}>
+    <View syles={styles.container}>
+      <View style={styles.container2}>
         <Image
           source={{uri: item?.artworkUrl100}}
-          style={{height: 60, width: 60, resizeMode: 'stretch', margin: 5}}
+          style={{height: 40, width: 40, resizeMode: 'stretch', margin: 5}}
         />
-      </View>
-      <View style={{flex: 1}}>
-        <Image
-          source={playButton}
-          style={{height: 60, width: 60, resizeMode: 'stretch', margin: 5}}
-        />
-      </View>
-      <View style={{flex: 1}}>
-        <Text>{item?.trackName}</Text>
-        <Text>{item?.artistName}</Text>
-        <Text>{item?.collectionName}</Text>
+        {/*<Image*/}
+        {/*  source={playButton}*/}
+        {/*  style={{height: 40, width: 40, resizeMode: 'stretch', margin: 5}}*/}
+        {/*/>*/}
+        <View style={styles.item}>
+          <Text numberOfLines={1}>{item?.trackName.substring(0, 40)}</Text>
+          <Text numberOfLines={1}>{item?.artistName.substring(0, 40)}</Text>
+          <Text numberOfLines={1}>{item?.collectionName.substring(0, 40)}</Text>
+        </View>
       </View>
     </View>
   </TouchableOpacity>
@@ -52,13 +53,13 @@ const ListSong = () => {
   }, [selectedItem]);
 
   const renderItem = ({item}) => {
-    // console.log('item ', item);
     const backgroundColor =
       item?.trackId === selectedItem?.trackId ? '#cdd1d2' : '#6e8d9f';
     const color = item?.trackId === selectedItem?.trackId ? 'white' : 'black';
 
     return (
       <Item
+        key={`item-${item?.trackId}`}
         item={item}
         onPress={() => setSelectedItem(item)}
         backgroundColor={{backgroundColor}}
@@ -70,11 +71,13 @@ const ListSong = () => {
   return (
     <View>
       <FlatList
+        key={'flat-info'}
         data={audioListData || []}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         extraData={selectedItem?.trackId}
       />
+
     </View>
   );
 };

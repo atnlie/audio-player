@@ -10,9 +10,7 @@ const SearchBox = () => {
   const [searchValue, onChangeText] = useState('');
 
   useEffect(() => {
-    console.log('Search for : ', searchValue);
     if (searchValue.length > 3) {
-      console.log('Fetch Data with : ', searchValue);
       dispatch(getAudioList(searchValue));
     }
   }, [searchValue]);
