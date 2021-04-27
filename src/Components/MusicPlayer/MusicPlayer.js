@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Button, Image} from 'react-native';
 import SoundPlayer from 'react-native-sound-player';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import styles from './MusicPlayer.styles';
 
 const MusicPlayer = () => {
@@ -9,8 +9,10 @@ const MusicPlayer = () => {
 
   const playSong = currentSong => {
     try {
+      console.log('currentSong', currentSong);
       if (!!currentSong) {
         SoundPlayer.playUrl(currentSong);
+        getInfo();
       } else {
         alert('select song please');
       }
@@ -22,22 +24,33 @@ const MusicPlayer = () => {
   const stopSong = () => {
     try {
       SoundPlayer.stop();
+      getInfo();
     } catch (e) {
       alert('cannot to pause');
     }
   };
 
+  const getInfo = async () => {
+    try {
+      const info = await SoundPlayer.getInfo();
+      console.log('getInfo', info);
+    } catch (e) {
+      console.log('There is no song playing', e);
+    }
+  };
+
   return (
     <View styles={styles.container}>
-      <View styles={styles.container2}>
-        <Button title="Stop" onPress={stopSong} disabled={false} />
-      </View>
-      <View styles={styles.container2}>
+      <View styles={styles.searchBox}>
         <Button
           title="Play"
           onPress={() => playSong(currentSong)}
           disabled={false}
         />
+        <Button title="Stop" onPress={stopSong} disabled={false} />
+      </View>
+      <View styles={styles.songList}>
+        <Button title="Stop" onPress={stopSong} disabled={false} />
       </View>
     </View>
   );

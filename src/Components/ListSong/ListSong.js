@@ -18,6 +18,7 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
           source={{uri: item?.artworkUrl100}}
           style={{height: 40, width: 40, resizeMode: 'stretch', margin: 5}}
         />
+        {/* add indicator for play*/}
         {/*<Image*/}
         {/*  source={playButton}*/}
         {/*  style={{height: 40, width: 40, resizeMode: 'stretch', margin: 5}}*/}
@@ -77,7 +78,6 @@ const ListSong = () => {
         keyExtractor={item => item.id}
         extraData={selectedItem?.trackId}
       />
-
     </View>
   );
 };

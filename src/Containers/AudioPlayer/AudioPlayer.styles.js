@@ -1,5 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
+
 const listHeight = Dimensions.get('window').height - 150;
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
