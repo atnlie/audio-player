@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   strTerm: '',
   errorMessage: '',
+  currentSong: '',
 };
 
 const AudioReducer = (state = initialState, action) => {
@@ -20,10 +21,10 @@ const AudioReducer = (state = initialState, action) => {
         audioList: action.payload.audioList,
       };
     }
-    case ActionType.SET_AUDIO_LOADING: {
+    case ActionType.SET_AUDIO_PLAY: {
       return {
         ...state,
-        isLoading: action.payload.isLoading
+        currentSong: action.payload.currentSong,
       };
     }
     default:

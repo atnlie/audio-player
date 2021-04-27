@@ -5,6 +5,7 @@ import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import styles from './ListSong.styles';
 import {getAudioList} from '../../Reducers/AudioReducer/AudioAction';
 import playButton from '../../Assets/wav.jpg';
+import * as ActionTypes from '../../Reducers/AudioReducer/AudioActionTypes';
 
 const Item = ({item, onPress, backgroundColor, textColor}) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -32,9 +33,8 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
 
 const ListSong = () => {
   const dispatch = useDispatch();
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const audioListData = useSelector(state => state?.audios?.audioList);
-  const isLoading = useSelector(state => state?.audios?.isLoading);
 
   useEffect(() => {
     const loadAudioList = async () => {
@@ -42,17 +42,25 @@ const ListSong = () => {
     };
 
     loadAudioList();
-  }, [dispatch, isLoading]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch({
+      type: ActionTypes.SET_AUDIO_PLAY,
+      payload: {currentSong: selectedItem?.previewUrl},
+    });
+  }, [selectedItem]);
 
   const renderItem = ({item}) => {
-    console.log('item ', item);
+    // console.log('item ', item);
     const backgroundColor =
-      item?.trackId === selectedId ? '#cdd1d2' : '#6e8d9f';
-    const color = item?.trackId === selectedId ? 'white' : 'black';
+      item?.trackId === selectedItem?.trackId ? '#cdd1d2' : '#6e8d9f';
+    const color = item?.trackId === selectedItem?.trackId ? 'white' : 'black';
+
     return (
       <Item
         item={item}
-        onPress={() => setSelectedId(item?.trackId)}
+        onPress={() => setSelectedItem(item)}
         backgroundColor={{backgroundColor}}
         textColor={{color}}
       />
@@ -65,7 +73,7 @@ const ListSong = () => {
         data={audioListData || []}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        extraData={selectedId}
+        extraData={selectedItem?.trackId}
       />
     </View>
   );
