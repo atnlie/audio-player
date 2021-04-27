@@ -6,11 +6,7 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {Provider} from 'react-redux';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
