@@ -43,6 +43,7 @@ const MusicPlayer = () => {
     <View styles={styles.container}>
       <View styles={styles.searchBox}>
         <Button
+          testId="buttonPlay"
           title="Play"
           onPress={() => playSong(currentSong)}
           disabled={false}
@@ -50,7 +51,12 @@ const MusicPlayer = () => {
         <Button title="Stop" onPress={stopSong} disabled={false} />
       </View>
       <View styles={styles.songList}>
-        <Button title="Stop" onPress={stopSong} disabled={false} />
+        <Button
+          testId="buttonStop"
+          title="Stop"
+          onPress={stopSong}
+          disabled={false}
+        />
       </View>
     </View>
   );
