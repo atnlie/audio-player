@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     height: listHeight,
   },
   musicPlayer: {
-    height: 100,
-    backgroundColor: 'black',
+    height: 40,
+    margin: 5,
   },
 });
 

@@ -51,6 +51,16 @@ describe('Test Music Player', () => {
     expect(component).toBeTruthy();
   });
 
+  test('Stop button is Exist', () => {
+    const {getByTestId} = render(<MusicPlayer />);
+
+    const component = getByTestId('buttonPause');
+    expect(component).toBeTruthy();
+
+    fireEvent.press(component);
+    expect(mockComponent.playButton).toBeCalledTimes(0);
+  });
+
   test('Play button get Click without click playlist action', () => {
     const {getByTestId} = render(<MusicPlayer {...mockComponent} />);
     const component = getByTestId('buttonPlay');

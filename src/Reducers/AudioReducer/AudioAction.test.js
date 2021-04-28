@@ -1,15 +1,12 @@
-// import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as ActionTypes from './AudioActionTypes';
-import {itunesAPIDefault} from '../../Constants/ApiEndpoint';
-
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
-fetch = jest.fn(() => Promise.resolve());
 
 const getAudioList = () => ({type: ActionTypes.GET_AUDIO_LIST});
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+const fetch = jest.fn(() => Promise.resolve());
 
 const fetchDataAudioList = () => {
   return dispatch => {

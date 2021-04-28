@@ -1,3 +1,4 @@
+import React from 'react';
 import * as ActionTypes from './AudioActionTypes';
 import {itunesAPIDefault} from '../../Constants/ApiEndpoint';
 
@@ -14,9 +15,9 @@ const getAudioList = strTerm => {
       payload: {
         audioList: audioListData,
         strTerm: strTerm,
-        isLoading: false
-      }
-    })
+        isLoading: false,
+      },
+    });
   };
 };
 

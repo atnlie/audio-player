@@ -23,20 +23,15 @@ describe('Test SearchBox Component', () => {
     expect(component).toBeTruthy();
   });
 
-  test('SearchBox set some value action', () => {
-    useSelectorMock.mockReturnValue('love song');
+  test('SearchBox find song list by input', () => {
+    useDispatchMock.mockReturnValue(jest.fn());
+
     const {getByTestId} = render(<SearchBox />);
     const component = getByTestId('searchBox');
-    expect(component).toBeTruthy();
-  });
+    // search song by title 'love song'
+    fireEvent.changeText(component, 'love song');
 
-  test('SearcBox input action', () => {
-    const onChangeTextMock = jest.fn();
-    const CHANGE_TEXT = 'love song';
-    useSelectorMock.mockReturnValue('love song');
-    const {getByTestId} = render(<SearchBox onChangeText={onChangeTextMock} />);
-    // const component = getByTestId('searchBox');
-    // expect(component).toBeTruthy();
-    // fireEvent.changeText(getByTestId('searchBox'), CHANGE_TEXT);
+    // set to null
+    fireEvent.changeText(component, '');
   });
 });

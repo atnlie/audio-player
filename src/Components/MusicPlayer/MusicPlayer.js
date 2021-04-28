@@ -27,9 +27,25 @@ const MusicPlayer = () => {
     }
   };
 
+  const pauseSong = () => {
+    try {
+      SoundPlayer.pause;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <View styles={styles.container} testID="musicPlayer">
-      <View styles={styles.searchBox}>
+    <View style={styles.mainContainer} testID="musicPlayer">
+      <View style={styles.buttonContainer}>
+        <Button
+          testID="buttonPause"
+          title="Pause"
+          onPress={pauseSong}
+          disabled={false}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
         <Button
           testID="buttonPlay"
           title="Play"
@@ -37,10 +53,10 @@ const MusicPlayer = () => {
           disabled={false}
         />
       </View>
-      <View styles={styles.songList}>
+      <View style={styles.buttonContainer}>
         <Button
-          testID="buttonStop"
           title="Stop"
+          testID="buttonStop"
           onPress={stopSong}
           disabled={false}
         />

@@ -8,6 +8,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonContainer: {
+    flex: 3,
+    backgroundColor: '#2f7ab7',
+  },
+  mainContainer: {
+    flexDirection: 'row',
     flex: 1,
   },
 });
