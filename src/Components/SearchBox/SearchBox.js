@@ -18,6 +18,7 @@ const SearchBox = () => {
   return (
     <View>
       <TextInput
+        testID={'searchBox'}
         style={styles.input}
         placeholder="Search Artist"
         onChangeText={onChangeText}

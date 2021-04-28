@@ -11,9 +11,8 @@ const MusicPlayer = () => {
     try {
       if (!!currentSong) {
         SoundPlayer.playUrl(currentSong);
-        getInfo();
       } else {
-        Alert.alert('Info', 'Select song please');
+        Alert.alert('Info', 'Please select the song.');
       }
     } catch (e) {
       console.log(e);
@@ -23,18 +22,8 @@ const MusicPlayer = () => {
   const stopSong = () => {
     try {
       SoundPlayer.stop();
-      getInfo();
     } catch (e) {
       console.log(e);
-    }
-  };
-
-  const getInfo = async () => {
-    try {
-      const info = await SoundPlayer.getInfo();
-      console.log('getInfo', info);
-    } catch (e) {
-      console.log('There is no song playing', e);
     }
   };
 

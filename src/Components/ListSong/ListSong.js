@@ -7,26 +7,31 @@ import {getAudioList} from '../../Reducers/AudioReducer/AudioAction';
 import playButton from '../../Assets/wav.jpg';
 import * as ActionTypes from '../../Reducers/AudioReducer/AudioActionTypes';
 
-const Item = ({item, onPress, backgroundColor, textColor}) => (
+export const Item = ({item, onPress, backgroundColor}) => (
   <TouchableOpacity
+    testID={`cardPlayList`}
     onPress={onPress}
     style={[styles.item, backgroundColor]}
     key={`itemBtn-${item?.trackId}`}>
-    <View syles={styles.container}>
-      <View style={styles.container2}>
+    <View style={[styles.item, styles.row]}>
+      <Image source={{uri: item?.artworkUrl100}} style={styles.pic} />
+
+      <View style={styles.end}>
         <Image
-          source={{uri: item?.artworkUrl100}}
-          style={{height: 40, width: 40, resizeMode: 'stretch', margin: 5}}
+          style={[styles.icon, styles.playIndicator]}
+          source={playButton}
         />
-        {/* add indicator for play*/}
-        {/*<Image*/}
-        {/*  source={playButton}*/}
-        {/*  style={{height: 40, width: 40, resizeMode: 'stretch', margin: 5}}*/}
-        {/*/>*/}
-        <View style={styles.item}>
-          <Text numberOfLines={1}>{item?.trackName.substring(0, 40)}</Text>
-          <Text numberOfLines={1}>{item?.artistName.substring(0, 40)}</Text>
-          <Text numberOfLines={1}>{item?.collectionName.substring(0, 40)}</Text>
+      </View>
+
+      <View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.nameTxt}>Name: {item?.trackName}</Text>
+        </View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.artistTxt}>Artist: {item?.artistName}</Text>
+        </View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.albumTxt}>Album: {item?.collectionName}</Text>
         </View>
       </View>
     </View>
@@ -55,23 +60,23 @@ const ListSong = () => {
 
   const renderItem = ({item}) => {
     const backgroundColor =
-      item?.trackId === selectedItem?.trackId ? '#cdd1d2' : '#6e8d9f';
-    const color = item?.trackId === selectedItem?.trackId ? 'white' : 'black';
+      item?.trackId === selectedItem?.trackId ? '#cdd1d2' : '#fff';
 
     return (
       <Item
+        testID={'renderItem'}
         key={`item-${item?.trackId}`}
         item={item}
         onPress={() => setSelectedItem(item)}
         backgroundColor={{backgroundColor}}
-        textColor={{color}}
       />
     );
   };
 
   return (
-    <View>
+    <View style={styles.mainContainer}>
       <FlatList
+        testID={'ListSongContent'}
         key={'flat-info'}
         data={audioListData || []}
         renderItem={renderItem}
