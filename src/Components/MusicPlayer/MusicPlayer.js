@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Button, Alert} from 'react-native';
 import SoundPlayer from 'react-native-sound-player';
 import {useSelector} from 'react-redux';
+
 import styles from './MusicPlayer.styles';
 
 const MusicPlayer = () => {

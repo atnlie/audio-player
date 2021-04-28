@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from "@testing-library/react-native";
+import {render} from '@testing-library/react-native';
 import * as redux from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

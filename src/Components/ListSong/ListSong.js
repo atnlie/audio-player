@@ -7,21 +7,25 @@ import {getAudioList} from '../../Reducers/AudioReducer/AudioAction';
 import playButton from '../../Assets/wav.jpg';
 import * as ActionTypes from '../../Reducers/AudioReducer/AudioActionTypes';
 
-export const Item = ({item, onPress, backgroundColor}) => (
+export const Item = ({item, onPress, backgroundColor, itemSelected}) => (
   <TouchableOpacity
-    testID={`cardPlayList`}
+    testID={'cardPlayList'}
     onPress={onPress}
     style={[styles.item, backgroundColor]}
     key={`itemBtn-${item?.trackId}`}>
     <View style={[styles.item, styles.row]}>
       <Image source={{uri: item?.artworkUrl100}} style={styles.pic} />
 
-      <View style={styles.end}>
-        <Image
-          style={[styles.icon, styles.playIndicator]}
-          source={playButton}
-        />
-      </View>
+      {itemSelected ? (
+        <View style={styles.end}>
+          <Image
+            style={[styles.icon, styles.playIndicator]}
+            source={playButton}
+          />
+        </View>
+      ) : (
+        <View />
+      )}
 
       <View>
         <View style={styles.nameContainer}>
@@ -69,6 +73,7 @@ const ListSong = () => {
         item={item}
         onPress={() => setSelectedItem(item)}
         backgroundColor={{backgroundColor}}
+        itemSelected={item?.trackId === selectedItem?.trackId}
       />
     );
   };
