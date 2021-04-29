@@ -6,6 +6,7 @@ To run this application you need install `yarn` or `npm` in your local machine a
 Please keep in mind on that to easy you to run this application without any complain from your terminal command line.
 
 ###Run Commands:
+- Please make sure you have `nvm version 12 or later` to run this app.
 - Go to inside `audio_player` and type `yarn` to install dependency libraries from `package.json` 
 - Type `yarn android` to run application in simulator
 - Wait until you get android simulator ready to use
@@ -20,5 +21,17 @@ Please keep in mind on that to easy you to run this application without any comp
 - To run test coverage unit test cases: `yarn test:coverage`
 
 ###Minimum Specification
-- Device: Android Version 5.0 (lolypop - API Level 21) or above
+- Device: Android Version 5.0 (Lollipop - API Level 21) or above
 - Has stable internet connection because all the song will fetch from internet
+
+###Caveat
+- Library `react-native-sound-player` has a bug can not play sound second onward without reload app
+- Here you go to the issue: https://github.com/johnsonsu/react-native-sound-player/issues/120
+- this is one of the simplest play audio library
+- Unit testing not 100% covered but all of them are regarding useSelector scenario test - time's up
+
+###Solution
+- Change library to complex library and check issue, use the up to date one to avoid any issue unresolved to long
+- this the library https://github.com/react-native-kit/react-native-track-player#readme
+- there are also a lot of issue https://github.com/react-native-kit/react-native-track-player/issues
+
