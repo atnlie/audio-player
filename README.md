@@ -18,3 +18,7 @@ Please keep in mind on that to easy you to run this application without any comp
 ###Execute Unit Test and Coverage
 - To run test unit test cases: `yarn test`
 - To run test coverage unit test cases: `yarn test:coverage`
+
+###Minimum Specification
+- Device: Android Version 5.0 (lolypop - API Level 21) or above
+- Has stable internet connection because all the song will fetch from internet
