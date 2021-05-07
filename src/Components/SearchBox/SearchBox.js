@@ -10,9 +10,11 @@ const SearchBox = () => {
   const [searchValue, onChangeText] = useState('');
 
   useEffect(() => {
-    if (searchValue.length > 3) {
+    const delayDebounceFn = setTimeout(() => {
       dispatch(getAudioList(searchValue));
-    }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
   }, [searchValue]);
 
   return (

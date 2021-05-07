@@ -11,6 +11,33 @@ const getSongList = () => ({type: ActionTypes.GET_AUDIO_LIST});
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const fetch = jest.fn(() => Promise.resolve());
+
+const mockRedux = {
+  audios: {
+    audioList: {
+      resultCount: 1,
+      results: [
+        {
+          trackID: '10923',
+          trackName: 'we will rock you',
+          artistName: 'scorpion',
+          collectionName: 'good 80s',
+        },
+        {
+          trackID: '10925',
+          trackName: 'i love you',
+          artistName: 'antlie',
+          collectionName: 'love song',
+        },
+      ],
+    },
+    isLoading: false,
+    strTerm: '',
+    errorMessage: '',
+    currentSong: 'i love you',
+  },
+};
+
 const initialState = {
   audios: {
     audioList: {
@@ -31,19 +58,28 @@ const initialState = {
   },
 };
 const dispatch = jest.fn();
-const useSelectorMock = jest.spyOn(redux, 'useSelector');
-const useDispatchMock = jest.spyOn(redux, 'useDispatch');
+// const useSelectorMock = jest.spyOn(redux, 'useSelector');
+// const useDispatchMock = jest.spyOn(redux, 'useDispatch');
+
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn(),
+  useSelector: jest.fn().mockImplementation(selector =>
+    selector({
+      ...mockRedux,
+    }),
+  ),
+}));
 
 describe('Test List Song Component', () => {
   beforeEach(() => {
-    useSelectorMock.mockClear();
-    useDispatchMock.mockClear();
+    // useSelectorMock.mockClear();
+    // useDispatchMock.mockClear();
   });
 
-  useSelectorMock.mockReturnValue(null);
-  useDispatchMock.mockReturnValue(null);
+  // useSelectorMock.mockReturnValue(null);
+  // useDispatchMock.mockReturnValue(null);
   test('Renders List Song correctly', () => {
-    useDispatchMock.mockReturnValue(jest.fn());
+    // useDispatchMock.mockReturnValue(jest.fn());
     const {getByTestId} = render(<ListSong {...dispatch} />);
     const component = getByTestId('ListSongContent');
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import * as redux from 'react-redux';
+
 import {render, fireEvent} from '@testing-library/react-native';
 
 import {MusicPlayer} from './MusicPlayer';
@@ -12,6 +12,41 @@ jest.mock('react-native-sound-player', () => {
   };
 });
 
+const mockRedux = {
+  audios: {
+    audioList: {
+      resultCount: 1,
+      results: [
+        {
+          trackID: '10923',
+          trackName: 'we will rock you',
+          artistName: 'scorpion',
+          collectionName: 'good 80s',
+        },
+        {
+          trackID: '10925',
+          trackName: 'i love you',
+          artistName: 'antlie',
+          collectionName: 'love song',
+        },
+      ],
+    },
+    isLoading: false,
+    strTerm: '',
+    errorMessage: '',
+    currentSong: 'i love you',
+  },
+};
+
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn(),
+  useSelector: jest.fn().mockImplementation(selector =>
+    selector({
+      ...mockRedux,
+    }),
+  ),
+}));
+
 const mockComponent = {
   playButton: jest.fn().mockImplementation(() => {
     return jest.fn();
@@ -20,14 +55,8 @@ const mockComponent = {
 };
 
 describe('Test Music Player', () => {
-  const useSelectorMock = jest.spyOn(redux, 'useSelector');
-  const useDispatchMock = jest.spyOn(redux, 'useDispatch');
-  // useSelectorMock.mockReturnValue('love song');
-  useSelectorMock.mockReturnValue(null);
-
-  beforeEach(() => {
-    useSelectorMock.mockClear();
-    useDispatchMock.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('Renders Music Player correctly', () => {
@@ -70,9 +99,9 @@ describe('Test Music Player', () => {
     expect(mockComponent.playButton).toBeCalledTimes(0);
   });
 
-  test('Play button get Click action', () => {
-    useSelectorMock.mockReturnValue('love song');
-    const {getByTestId} = render(<MusicPlayer {...mockComponent} />);
+  test('Play button get Click with click playlist action', () => {
+    mockRedux.audios.currentSong = '';
+    const {getByTestId} = render(<MusicPlayer />);
     const component = getByTestId('buttonPlay');
     expect(component).toBeTruthy();
 
